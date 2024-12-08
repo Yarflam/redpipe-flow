@@ -1,0 +1,30 @@
+{
+    "name": "redpipe-flow",
+    "version": "1.0.3",
+    "description": "Javascript - PIPE Flow",
+    "author": "Yarflam",
+    "main": "index.cjs",
+    "license": "CC0-1.0",
+    "scripts": {
+        "start": "node test.cjs",
+        "test": "node test.cjs"
+    },
+    "keywords": [
+        "Pipe",
+        "Queue",
+        "NodeRED",
+        "Gulp",
+        "Javascript"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Yarflam/redpipe-flow.git"
+    },
+    "bugs": {
+        "url": "https://github.com/Yarflam/redpipe-flow/issues"
+    },
+    "homepage": "https://github.com/Yarflam/redpipe-flow#readme",
+    "dependencies": {
+        "redpipe": "^1.0.3"
+    }
+}
