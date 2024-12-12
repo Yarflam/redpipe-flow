@@ -176,4 +176,4 @@ class Nested {
     }
 }
 
-module.exports = Nested;
+export default Nested;

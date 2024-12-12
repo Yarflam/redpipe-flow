@@ -1,6 +1,9 @@
-const RedPipe = require('redpipe');
-const Tools = require('./Tools.cjs');
-const Nested = require('./Nested.cjs')
+import RedPipe from 'redpipe';
+import {
+    Format,
+    Nested,
+    uniqid
+} from './utils/index.mjs';
 
 class RedPipeFlow {
     static MAIN_FLOW = 'main';
@@ -9,7 +12,8 @@ class RedPipeFlow {
         this._flows = new Map();
         this._actions = {
             route: this.__actionRoute,
-            console: this.__actionConsole
+            console: this.__actionConsole,
+            switch: this.__actionSwitch
         };
     }
 
@@ -17,7 +21,7 @@ class RedPipeFlow {
         const flow = this._flows.get(flowName);
         if(!flow) return false;
         /* Create a job */
-        const job = Tools.uniqid();
+        const job = uniqid();
         flow.send({
             topic: `${flowName}-${job}`,
             payload: args?.payload || job,
@@ -57,6 +61,20 @@ class RedPipeFlow {
             }
             console[logType](options[logType]);
         }
+        return msg;
+    }
+
+    __actionSwitch(options, msg) {
+        options = RedPipeFlow.ctrlParams(options, {
+            source: { type: 'string', default: 'msg.payload' },
+            target: { type: 'string', optional: true }
+        });
+        RedPipeFlow.setNested({ msg }, options.target,
+            Format.secureType(
+                RedPipeFlow.getNested({ msg }, options.source || options.target, ''),
+                'string'
+            )
+        );
         return msg;
     }
 
@@ -110,7 +128,7 @@ class RedPipeFlow {
     }
 
     static ctrlParams(params = {}, ctrl = {}) {
-        return Tools.ctrlParams(params, ctrl);
+        return Format.ctrlParams(params, ctrl);
     }
 
     static getNested(obj, path, defaultValue=null, sep='.') {
@@ -120,6 +138,12 @@ class RedPipeFlow {
     static setNested(obj, path, value, autoCreate=true, sep='.') {
         return Nested.set(obj, path, value, autoCreate, sep);
     }
+
+    static bindVars(str, obj) {
+        return str.replace(/\{([^}]+)\}/g, (match, vpath) => {
+            return Nested.set(obj, vpath, match);
+        });
+    }
 }
 
-module.exports = RedPipeFlow;
+export default RedPipeFlow;

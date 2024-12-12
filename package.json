@@ -3,10 +3,12 @@
     "version": "1.0.3",
     "description": "Javascript - PIPE Flow",
     "author": "Yarflam",
-    "main": "index.cjs",
+    "main": "dist/index.js",
     "license": "CC0-1.0",
     "scripts": {
         "start": "node test.cjs",
+        "build": "rollup -c",
+        "watch": "rollup -c -w",
         "test": "node test.cjs"
     },
     "keywords": [
@@ -26,5 +28,13 @@
     "homepage": "https://github.com/Yarflam/redpipe-flow#readme",
     "dependencies": {
         "redpipe": "^1.0.3"
+    },
+    "devDependencies": {
+        "@rollup/plugin-commonjs": "^28.0.1",
+        "@rollup/plugin-node-resolve": "^15.3.0",
+        "eslint": "^8.57.1",
+        "prettier-eslint": "^16.3.0",
+        "rollup": "^2.79.2",
+        "rollup-plugin-terser": "^7.0.2"
     }
 }

@@ -1,4 +1,4 @@
-const RedPipeFlow = require('./index.cjs');
+const { RedPipeFlow } = require('./dist');
 
 const app = new RedPipeFlow();
 app.loadActions({

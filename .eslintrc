@@ -1,0 +1,28 @@
+{
+    "parserOptions": {
+        "ecmaVersion": 2022,
+        "sourceType": "module"
+    },
+    "env": {
+        "es6": true,
+        "browser": false,
+        "node": true,
+        "mocha": true
+    },
+    "extends": ["eslint:recommended"],
+    "rules": {
+        "arrow-parens": ["error", "as-needed"],
+        "comma-dangle": ["error", "never"],
+        "indent": ["error", 4, { "SwitchCase": 1 }],
+        "linebreak-style": ["error", "unix"],
+        "no-console": "off",
+        "no-var": "error",
+        "quotes": ["error", "single"],
+        "react/prop-types": 0,
+        "require-atomic-updates": "warn",
+        "semi": ["error", "always"]
+    },
+    "settings": {
+        "propWrapperFunctions": ["forbidExtraProps"]
+    }
+}
